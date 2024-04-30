@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-async function getCards(){
+ async function getCards(){
     const res = await fetch(
         'http://localhost:5289/*api/WarHammer',
 
