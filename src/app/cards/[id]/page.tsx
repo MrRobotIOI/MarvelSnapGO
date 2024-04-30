@@ -18,7 +18,7 @@ export default async  function CardPage({params} : any){
     )
 }
 
-export  async function getCard(cardId: string) {
+async function getCard(cardId: string) {
     const res = await fetch(`http://localhost:5289/*api/WarHammer/${cardId}`,
         {
             next: {revalidate : 10}
