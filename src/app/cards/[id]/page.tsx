@@ -19,7 +19,7 @@ export default async  function CardPage({params} : any){
 }
 
 async function getCard(cardId: string) {
-    const res = await fetch(`http://localhost:5289/*api/WarHammer/${cardId}`,
+    const res = await fetch(`https://marvelsnapgoapi.azurewebsites.net/*api/WarHammer/${cardId}`,
         {
             next: {revalidate : 10}
 

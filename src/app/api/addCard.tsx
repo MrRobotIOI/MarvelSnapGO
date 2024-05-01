@@ -6,7 +6,7 @@ export  default async function addCard(id: number, card_id:number) {
 
 
     const res = await fetch(
-        'http://localhost:5289/user?id='+id+'&cardid='+card_id,
+        'https://marvelsnapgoapi.azurewebsites.net/user?id='+id+'&cardid='+card_id,
         {
             method: 'PUT',
 

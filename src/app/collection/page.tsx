@@ -17,7 +17,7 @@ export default function Page() {
 
         () => {
             if(session?.user.id !== undefined) {
-                fetch('http://localhost:5289/user/collection?id=' + session?.user?.id,
+                fetch('https://marvelsnapgoapi.azurewebsites.net/user/collection?id=' + session?.user?.id,
                 )
                     .then((res) => res.json())
                     .then((data) => {

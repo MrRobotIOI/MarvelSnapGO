@@ -7,7 +7,7 @@ import {useSession} from "next-auth/react";
 
 async function getCards(){
     const res = await fetch(
-        'http://localhost:5289/*api/WarHammer',
+        'https://marvelsnapgoapi.azurewebsites.net/*api/WarHammer',
 
         { cache: 'no-store'}
     );
