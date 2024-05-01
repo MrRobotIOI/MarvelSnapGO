@@ -12,18 +12,26 @@ const pool = new Pool({
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
+    ssl: {
+        rejectUnauthorized: false,
+
+    },
+
 })
 
 const handler = NextAuth({
+
     adapter: PostgresAdapter(pool) as Adapter,
     providers:[
         GoogleProvider({
             clientId:process.env.GOOGLE_CLIENT_ID ?? "",
             clientSecret : process.env.GOOGLE_CLIENT_SECRET ??"",
+
         },)
     ],
-    secret : process.env.NEXTAUTH_SECRET
-    ,
+ secret : process.env.NEXTAUTH_SECRET,
+
+
     callbacks: {
 
         async session({ session, user }: any) {
