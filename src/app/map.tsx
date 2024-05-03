@@ -250,7 +250,7 @@ export default function MapPage({cards}: any){
 <div className={"pt-16 fill-transparent"}>
 
 </div>
-            <div style={{height: '600px'}} className={"clear-both"} ref={mapRef}></div>
+            <div style={{height: '800px'}} className={"clear-both"} ref={mapRef}></div>
 
         </div>
         </>
