@@ -11,10 +11,11 @@ export default function Page() {
 
     const [data, setData] = useState([])
     const [cards, setCards] = useState()
-    const [tempdata, setTempData] = useState(JSON.parse(localStorage.getItem("collection")||"[]") as Array<any> || [])
+    const [tempdata, setTempData] = useState([])
     console.log(session?.user.id)
     useEffect(
         () => {
+            setTempData(JSON.parse(localStorage.getItem("collection")||"[]"));
             if (session?.user.id !== undefined) {
                 fetch('https://marvelsnapgoapi.azurewebsites.net/user/collection?id=' + session?.user?.id,
 
