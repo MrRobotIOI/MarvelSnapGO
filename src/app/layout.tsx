@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "MSGO",
   description: "Marvel Snap GO Application made by Zed",
+
 };
 
 export default function RootLayout({

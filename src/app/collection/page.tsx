@@ -37,7 +37,7 @@ export default function Page() {
         }, [session, tempdata])
 
 
-    if (data.length < 1) {
+  /*  if (data.length < 1) {
 
         return (
             <>
@@ -56,18 +56,19 @@ console.log(JSON.parse(cardo as Object as string).name);
                 </div>
             </>
         );
-    } else {
+    } */
         return (
             <>
+                <div></div>
                 <Link href={`/`}
-                      className={" relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"}
+                      className={" float-right clear-both relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white border-transparent focus:border-transparent focus:ring-0"}
                       passHref>
                                      <span
-                                         className=" relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                         className=" relative px-5 py-2.5 transition-all ease-in duration-1000 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     View Map
                                      </span>
                 </Link>
-                <div className={"pt-4"}>
+                <div className={"pt-20"}>
 
                     {
                         data?.map((cardo) => {
@@ -78,7 +79,7 @@ console.log(JSON.parse(cardo as Object as string).name);
                 </div>
             </>
         );
-    }
+
 }
 
 
@@ -88,8 +89,8 @@ function Card(card: any) {
     console.log(card.card);
 
     return (
-        <Link href={`https://marvelsnap.pro/cards/${card.card.toLowerCase()}`} passHref>
-        <img style={{width: "500px"}} src={"https://static.marvelsnap.pro/cards/" + card.card + "-uncommon.webp"}/>
+        <Link className={"clear-both text-center "} href={`https://marvelsnap.pro/cards/${card.card.toLowerCase()}`} passHref>
+        <img className={"m-auto"} style={{width: "500px"}} src={"https://static.marvelsnap.pro/cards/" + card.card + "-uncommon.webp"}/>
         </Link>
 
     );
