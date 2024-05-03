@@ -3,7 +3,7 @@ import SigninButton from "@/app/components/SigninButton";
 
 function Appbar() {
     return (
-       <header className={'flex'}>
+       <header className={' pb-4'}>
 
            <SigninButton />
        </header>
