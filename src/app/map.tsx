@@ -13,6 +13,7 @@ let collection: any[] = [];
 let usersession : {
     user: {};
 };
+var allMarkers: any[] = [];
 export interface MSCard {
     id: number;
     name: string;
@@ -54,7 +55,7 @@ function makeCardMarker(card:any, position:any,infoWindow:any){
 
     })
     marker2.setAttribute("cardid", JSON.stringify(card));
-
+    allMarkers.push(marker2);
     marker2.addListener("click", async () => {
 
         collection.push(marker2.getAttribute("cardid"));
@@ -113,7 +114,7 @@ export default function MapPage({cards}: any){
 
             const mapOptions: google.maps.MapOptions = {
 
-                zoom: 18.9,
+                zoom: 18,
                 mapId: "7734243d93612cb3",
                 heading: 320,
                 tilt: 47.5,
@@ -133,46 +134,94 @@ export default function MapPage({cards}: any){
 
 
 
-            const {Marker} = await loader.importLibrary('marker') as google.maps.MarkerLibrary;
-
-            navigator.geolocation.getCurrentPosition((pos) => {
-
-
-
-               let position = {
-                    lat: pos.coords.latitude,
-                    lng:  pos.coords.longitude
-                }
-                userLocation = {
-                    lat: pos.coords.latitude,
-                    lng: pos.coords.longitude
-                }
-
-                map.setCenter(position);
-
-                const currcard = getRandomCard(cards);
-                const infoWindow = new InfoWindow({
-                    disableAutoPan: true
-                });
-                makeCardMarker(currcard, position,infoWindow);
-
-
+            const infoWindow = new InfoWindow({
+                disableAutoPan: true
             });
 
-            //need
 
 
 
-            const marker = new google.maps.marker.AdvancedMarkerElement({
-                map,
-                position: userLocation,
+            const {Marker} = await loader.importLibrary('marker') as google.maps.MarkerLibrary;
+
+                navigator.geolocation.getCurrentPosition((pos) => {
 
 
-            })
-            console.log(marker);
-            setInterval(() =>{
-                updateUserLocation(map, marker);
-            },1000);
+
+                    let position = {
+                        lat: pos.coords.latitude,
+                        lng:  pos.coords.longitude
+                    }
+                    userLocation = {
+                        lat: pos.coords.latitude,
+                        lng: pos.coords.longitude
+                    }
+
+                    map.setCenter(position);
+
+                    var currcard = getRandomCard(cards);
+
+                    makeCardMarker(currcard, position,infoWindow);
+
+                    const marker = new google.maps.marker.AdvancedMarkerElement({
+                        map,
+                        position: userLocation,
+
+
+                    })
+
+                    setInterval(() =>{
+                        updateUserLocation(map, marker);
+                    },1000);
+                    setInterval(() =>{
+                        currcard = getRandomCard(cards);
+                        makeCardMarker(currcard, position,infoWindow);
+                    },15000);
+                    setInterval(() =>{
+                        if(allMarkers.length>0){
+                            allMarkers.at(0).setMap(null);
+                           allMarkers = allMarkers.slice(1,allMarkers.length);
+                           console.log(allMarkers);
+                        }
+                    },14000);
+                },
+
+                    (error)=>{
+                    let defaultposition = {
+                        lat: 43.081528,
+                        lng:  -79.064240
+                    }
+
+                    map.setCenter(defaultposition);
+
+                    var tempcard = getRandomCard(cards);
+                    makeCardMarker(tempcard, defaultposition,infoWindow);
+
+                    const marker = new google.maps.marker.AdvancedMarkerElement({
+                        map,
+                        position: defaultposition,
+
+
+                    })
+                    setInterval(() =>{
+                        tempcard = getRandomCard(cards);
+                        makeCardMarker(tempcard, defaultposition,infoWindow);
+                    },15000);
+                    setInterval(() =>{
+                        if(allMarkers.length>0){
+                            allMarkers.at(0).setMap(null);
+                            allMarkers = allMarkers.slice(1,allMarkers.length);
+                            console.log(allMarkers);
+                        }
+                    },14000);
+
+                });
+
+
+
+
+
+
+
 
 
 

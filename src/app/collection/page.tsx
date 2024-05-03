@@ -7,62 +7,82 @@ import Link from "next/link";
 
 export default function Page() {
 
-   const {data: session} =  useSession();
+    const {data: session} = useSession();
 
     const [data, setData] = useState([])
     const [cards, setCards] = useState()
-
+    const [tempdata, setTempData] = useState(JSON.parse(localStorage.getItem("collection")||"[]") as Array<any> || [])
     console.log(session?.user.id)
     useEffect(
-
         () => {
-            if(session?.user.id !== undefined) {
+            if (session?.user.id !== undefined) {
                 fetch('https://marvelsnapgoapi.azurewebsites.net/user/collection?id=' + session?.user?.id,
+
                 )
                     .then((res) => res.json())
                     .then((data) => {
                         setData(data);
-                     //   console.log(cards);
-                        //console.log(data.at(0));
-                        //  setLoading(false)
+
                     })
                     .finally(() => {
                         console.log(data);
                     })
 
 
-
-        }}, [session])
-
-
-
-
-    return (
-        <>
-            <Link href={`/homemap`} passHref>
-                View Map
-            </Link>
-        <div>
-            {
-                data?.map((cardo) => {
-
-                    return <Card key={0} card={cardo}/>;
-                })
             }
-        </div>
-        </>
-    );
+
+        }, [session, tempdata])
+
+
+    if (data.length < 1) {
+
+        return (
+            <>
+
+                <Link href={`/`} passHref>
+                    View Temp Map
+                </Link>
+                <div>
+
+                    {
+                        tempdata?.map((cardo) => {
+console.log(JSON.parse(cardo as Object as string).name);
+                            return <Card key={0} card={JSON.parse(cardo as Object as string).name}/>;
+                        })
+                    }
+                </div>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <Link href={`/`} passHref>
+                    View Map
+                </Link>
+                <div>
+                    {}
+                    {
+                        data?.map((cardo) => {
+
+                            return <Card key={0} card={cardo}/>;
+                        })
+                    }
+                </div>
+            </>
+        );
+    }
 }
 
 
+
+
 function Card(card: any) {
-console.log(card.card);
+    console.log(card.card);
 
     return (
-
-
-        <img style={{width: "500px"}} src={"https://static.marvelsnap.pro/cards/"+card.card+".webp"}/>
-
+        <Link href={`https://marvelsnap.pro/cards/${card.card.toLowerCase()}`} passHref>
+        <img style={{width: "500px"}} src={"https://static.marvelsnap.pro/cards/" + card.card + "-uncommon.webp"}/>
+        </Link>
 
     );
 }
