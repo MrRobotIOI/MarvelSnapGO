@@ -177,8 +177,8 @@ export default function MapPage({cards}: any){
                         makeCardMarker(currcard, position,infoWindow);
                     },15000);
                     setInterval(() =>{
-                        const randomValue = Math.round(Math.random());
-                        if(allMarkers.length>0 && randomValue > 0){
+                        const randomValue = Math.random();
+                        if(allMarkers.length>0 && randomValue > 0.3){
                             allMarkers.at(0).setMap(null);
                            allMarkers = allMarkers.slice(1,allMarkers.length);
                            console.log(allMarkers);
