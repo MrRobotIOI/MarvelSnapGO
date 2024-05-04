@@ -210,7 +210,7 @@ export default function MapPage({cards}: any){
                     },15000);
                     setInterval(() =>{
                         const randomValue = Math.random();
-                        if(allMarkers.length>0 && randomValue > 0.3){
+                        if(allMarkers.length>0 && randomValue > 0.5){
                             allMarkers.at(0).setMap(null);
                             allMarkers = allMarkers.slice(1,allMarkers.length);
                             console.log(allMarkers);
