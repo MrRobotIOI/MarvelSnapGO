@@ -14,5 +14,6 @@ Marvel Snap Go is a web application that allows users to collect Marvel Snap car
 - Next.js
 - C# .NET
 - Postgres
+- Tailwind CSS
 - Google OAuth
 - Google Maps API
