@@ -165,6 +165,7 @@ export default function MapPage({cards}: any){
                     const marker = new google.maps.marker.AdvancedMarkerElement({
                         map,
                         position: userLocation,
+                        zIndex: 999,
 
 
                     })
