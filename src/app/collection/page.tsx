@@ -11,7 +11,10 @@ export default function Page() {
 
     const [data, setData] = useState([])
     const [cards, setCards] = useState()
-
+    const [tempdata, setTempData] = useState(typeof window !== "undefined"
+            ? (JSON.parse(localStorage.getItem("collection") || "[]") as Array<any>)
+            : []
+    );
     console.log(session?.user.id)
     useEffect(
         () => {
@@ -31,7 +34,7 @@ export default function Page() {
 
             }
 
-        }, [session])
+        }, [session, tempdata])
 
 
     if (!(session && session.user)) {
@@ -51,11 +54,11 @@ export default function Page() {
                 <div className={"pt-20"}>
 
                 {
-                    JSON.parse(localStorage.getItem("collection")||"[]").map
-                       ((cardo:[],index:any) => {
 
+                        tempdata?.map((cardo,index) => {
 
-
+                            console.log(tempdata);
+console.log(JSON.parse(cardo as Object as string).name);
                             return <Card key={index} card={JSON.parse(cardo as Object as string).name}/>;
                         })
                     }
