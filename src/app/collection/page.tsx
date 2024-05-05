@@ -11,10 +11,7 @@ export default function Page() {
 
     const [data, setData] = useState([])
     const [cards, setCards] = useState()
-    const [tempdata, setTempData] = useState(typeof window !== "undefined"
-            ? (JSON.parse(localStorage.getItem("collection") || "[]") as Array<any>)
-            : []
-    );
+
     console.log(session?.user.id)
     useEffect(
         () => {
@@ -34,29 +31,39 @@ export default function Page() {
 
             }
 
-        }, [session, tempdata])
+        }, [session])
 
 
-  /*  if (data.length < 1) {
+    if (!(session && session.user)) {
 
         return (
             <>
 
-                <Link href={`/`} passHref>
-                    View Temp Map
+                <div></div>
+                <Link href={`/`}
+                      className={" float-right clear-both relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white border-transparent focus:border-transparent focus:ring-0"}
+                      passHref>
+                                     <span
+                                         className=" relative px-5 py-2.5 transition-all ease-in duration-300 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                    View Map
+                                     </span>
                 </Link>
-                <div>
+                <div className={"pt-20"}>
 
-                    {
-                        tempdata?.map((cardo) => {
-console.log(JSON.parse(cardo as Object as string).name);
-                            return <Card key={0} card={JSON.parse(cardo as Object as string).name}/>;
+                {
+                    JSON.parse(localStorage.getItem("collection")||"[]").map
+                       ((cardo:[],index:any) => {
+
+
+
+                            return <Card key={index} card={JSON.parse(cardo as Object as string).name}/>;
                         })
                     }
                 </div>
             </>
         );
-    } */
+    }
+    else {
         return (
             <>
                 <div></div>
@@ -64,7 +71,7 @@ console.log(JSON.parse(cardo as Object as string).name);
                       className={" float-right clear-both relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white border-transparent focus:border-transparent focus:ring-0"}
                       passHref>
                                      <span
-                                         className=" relative px-5 py-2.5 transition-all ease-in duration-1000 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                         className=" relative px-5 py-2.5 transition-all ease-in duration-300 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     View Map
                                      </span>
                 </Link>
@@ -79,14 +86,14 @@ console.log(JSON.parse(cardo as Object as string).name);
                 </div>
             </>
         );
-
+    }
 }
 
 
 
 
 function Card(card: any) {
-    console.log(card.card);
+    //console.log(card);
 
     return (
         <Link className={"clear-both text-center "} href={`https://marvelsnap.pro/cards/${card.card.toLowerCase()}`} passHref>

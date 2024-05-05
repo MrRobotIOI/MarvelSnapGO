@@ -58,10 +58,9 @@ function makeCardMarker(card:any, position:any,infoWindow:any){
     allMarkers.push(marker2);
     marker2.addListener("click", async () => {
 
-        collection.push(marker2.getAttribute("cardid"));
-        console.log(collection);
+
         let collectionconv = JSON.parse(localStorage.getItem("collection") || "[]");
-        collectionconv.push(collection.at(0));
+        collectionconv.push(marker2.getAttribute("cardid"));
         const session= await getSession();
 
 
@@ -72,8 +71,10 @@ function makeCardMarker(card:any, position:any,infoWindow:any){
 
         } else {
 
+            console.log("card Added:")
 
             localStorage.setItem("collection", JSON.stringify(collectionconv));
+            console.log(localStorage.getItem("collection"));
         }
 
         marker2.map = null;
